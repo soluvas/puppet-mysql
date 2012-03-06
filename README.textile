@@ -1,0 +1,24 @@
+h1. MySQL
+
+h2. Server
+
+bc. class { mysql:
+  admin_password => 'password'
+}
+
+h2. Database
+
+bc. mysql::db { mydb:
+	name => 'mydb' }
+
+You can add @ensure => 'present'@ (default) or @'absent'@ (drop the database).
+
+h2. User
+
+bc. mysql::user { ania:
+	user => 'ania', password => 'password' }
+
+You can add @ensure => 'present'@ (default) or @'absent'@ (drop the user).
+ 
+h2. Grant
+ 
