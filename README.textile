@@ -1,24 +1,41 @@
-h1. MySQL
+h1. MySQL Puppet module
 
-h2. Server
+
+h2. Typical Usage
 
 bc. class { mysql:
   admin_password => 'password'
 }
 
+This will setup MySQL server. It will ensure that the MySQL User @root@ password is
+the specified password. Empty @root@ password is not supported.
+
+
 h2. Database
 
 bc. mysql::db { mydb:
-	name => 'mydb' }
+}
 
 You can add @ensure => 'present'@ (default) or @'absent'@ (drop the database).
+
 
 h2. User
 
 bc. mysql::user { ania:
-	user => 'ania', password => 'password' }
+	password => 'password'
+}
 
 You can add @ensure => 'present'@ (default) or @'absent'@ (drop the user).
  
+
 h2. Grant
  
+bc. mysql::grant { ania_magento:
+	dbname   => 'ania_magento',
+	user     => 'ania'
+}
+
+You can add @ensure => 'present'@ (grant all permissions on database to user) or @'absent'@ (revoke all permissions on database to user).
+
+Granting privileges adds implicit dependencies to the MySQL DB and User. Revoking privileges
+does not require dependencies to MySQL DB and User.
