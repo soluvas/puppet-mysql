@@ -13,8 +13,7 @@ the specified password. Empty @root@ password is not supported.
 
 h2. Database
 
-bc. mysql::db { mydb:
-}
+bc. mysql::db { mydb: }
 
 You can add @ensure => 'present'@ (default) or @'absent'@ (drop the database).
 
@@ -22,7 +21,7 @@ You can add @ensure => 'present'@ (default) or @'absent'@ (drop the database).
 h2. User
 
 bc. mysql::user { ania:
-	password => 'password'
+  password => 'password'
 }
 
 You can add @ensure => 'present'@ (default) or @'absent'@ (drop the user).
@@ -31,8 +30,8 @@ You can add @ensure => 'present'@ (default) or @'absent'@ (drop the user).
 h2. Grant
  
 bc. mysql::grant { ania_magento:
-	dbname   => 'ania_magento',
-	user     => 'ania'
+  dbname   => 'ania_magento',
+  user     => 'ania'
 }
 
 You can add @ensure => 'present'@ (grant all permissions on database to user) or @'absent'@ (revoke all permissions on database to user).
