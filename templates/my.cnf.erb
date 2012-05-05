@@ -109,12 +109,16 @@ innodb_log_group_home_dir       = /var/lib/mysql
 innodb_buffer_pool_size         = <%= innodb_buffer_pool_size %>
 innodb_additional_mem_pool_size = <%= innodb_additional_mem_pool_size %>
 # Set .._log_file_size to 25 % of buffer pool size
+<% if !innodb_log_file_size.nil? -%>
 innodb_log_file_size            = <%= innodb_log_file_size %>
+<% end -%>
 innodb_log_buffer_size          = <%= innodb_log_buffer_size %>
 innodb_thread_concurrency       = <%= innodb_thread_concurrency %>
 innodb_flush_log_at_trx_commit  = <%= innodb_flush_log_at_trx_commit %>
 innodb_lock_wait_timeout        = 50
 innodb_flush_method             = <%= innodb_flush_method %>
+
+transaction-isolation           = <%= transaction_isolation %>
 
 # * Security Features
 #
