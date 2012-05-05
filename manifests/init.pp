@@ -6,15 +6,30 @@
 class mysql (
   $admin_user = 'root',
   $admin_password,
-  $bind_address = '127.0.0.1'     # Always set to 127.0.0.1 unless you have firewall
+  $bind_address = '127.0.0.1',      # Always set to 127.0.0.1 unless you have firewall
+  # Default tune values inspired by: http://www.linode.com/stackscripts/view/?StackScriptID=1
+  $key_buffer = '300M',             # 75%
+  $sort_buffer_size = '4M',         # 1%
+  $read_buffer_size = '4M',         # 1%
+  $read_rnd_buffer_size = '4M',     # 1%
+  $myisam_sort_buffer_size = '20M', # 5%
+  $query_cache_size = '60M'         # 15%
 ) {
   package {
     mysql-server: ensure => present;
     mysql-client: ensure => present;
   }
-  augeas { 'mysql bind-address':
+  augeas { mysql:
   	context => '/files/etc/mysql/my.cnf',
-  	changes => "set */bind-address ${bind_address}",
+  	changes => [
+  	  "set */bind-address                    ${bind_address}",
+  	  "set */key_buffer                      ${key_buffer}",
+  	  "set target[3]/sort_buffer_size        ${sort_buffer_size}",
+  	  "set target[3]/read_buffer_size        ${read_buffer_size}",
+  	  "set target[3]/read_rnd_buffer_size    ${read_rnd_buffer_size}",
+  	  "set target[3]/myisam_sort_buffer_size ${myisam_sort_buffer_size}",
+  	  "set */query_cache_size                ${query_cache_size}",
+  	],
   	require => Package['mysql-server'],
   }
 
