@@ -53,11 +53,10 @@ interactive-timeout
 
  */
 class mysql (
-  $admin_user = 'root',
+  $admin_user                      = 'root',
   $admin_password,
-  $bind_address = '127.0.0.1',      # Always set to 127.0.0.1 unless you have firewall
-  $max_connections = 100,           # InnoDB 4G
-  $max_allowed_packet = 16M,
+  $bind_address                    = '127.0.0.1',      # Always set to 127.0.0.1 unless you have firewall
+  $max_connections                 = 100,              # InnoDB 4G
   # Default MyISAM tune values from my-large.cnf
   $key_buffer                      = '256M',
   $max_allowed_packet              = '1M',
