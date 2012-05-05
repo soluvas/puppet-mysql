@@ -67,7 +67,6 @@ class mysql (
   $read_rnd_buffer_size            = '4M',
   $myisam_sort_buffer_size         = '64M',
   $thread_cache_size               = 8,
-  $table_cache                     = 64,
   $query_cache_size                = '16M',
   # see http://www.infotales.com/magento-perofrmance-optimizing-your-mysql-server/ for values below
   # http://stackoverflow.com/a/1429273/122441
