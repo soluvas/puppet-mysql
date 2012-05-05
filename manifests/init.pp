@@ -5,21 +5,28 @@
  */
 class mysql (
   $admin_user = 'root',
-  $admin_password)
-{
+  $admin_password,
+  $bind_address = '127.0.0.1'     # Always set to 127.0.0.1 unless you have firewall
+) {
   package {
     mysql-server: ensure => present;
     mysql-client: ensure => present;
   }
+  augeas { 'mysql bind-address':
+  	context => '/files/etc/mysql/my.cnf',
+  	changes => "set */bind-address ${bind_address}",
+  	require => Package['mysql-server'],
+  }
 
   # Workaround for Puppet 2.7.10 & Ubuntu 11.10
   service { mysql:
-    enable => true,
-    ensure => running,
-    hasstatus => true,
+    enable     => true,
+    ensure     => running,
+    hasstatus  => true,
     hasrestart => true,
-    status => '/usr/sbin/service mysql status | grep start',
-    require => Package['mysql-server'],
+    status     => '/usr/sbin/service mysql status | grep start',
+    require    => Package['mysql-server'],
+    subscribe  => Augeas['mysql bind-address'],
   }
 
   # Set root password
@@ -29,6 +36,7 @@ class mysql (
   	logoutput => true,
   	require => Service['mysql']
   }
+
 
   define db ($ensure = 'present') {
   	$dbname = $name
