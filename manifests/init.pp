@@ -84,21 +84,21 @@ class mysql (
     mysql-server: ensure => present;
     mysql-client: ensure => present;
   }
-  file { '/etc/mysql/my.cnf':
-  	content => template('mysql/my.cnf.erb'),
-    mode    => 0644,
-    require => Package['mysql-server'],
-  }
-
-  # Workaround for Puppet 2.7.10 & Ubuntu 11.10
   service { mysql:
     enable     => true,
     ensure     => running,
     hasstatus  => true,
     hasrestart => true,
+    # Workaround for Puppet 2.7.10 & Ubuntu 11.10
     status     => '/usr/sbin/service mysql status | grep start',
     require    => Package['mysql-server'],
-    subscribe  => Augeas['mysql bind-address'],
+  }
+
+  file { '/etc/mysql/my.cnf':
+  	content => template('mysql/my.cnf.erb'),
+    mode    => 0644,
+    require => Package['mysql-server'],
+    notify  => Service['mysql'],
   }
 
   # Set root password
