@@ -58,14 +58,14 @@ class mysql (
   $bind_address                    = '127.0.0.1',      # Always set to 127.0.0.1 unless you have firewall
   $max_connections                 = 100,              # InnoDB 4G
   # Default MyISAM tune values from my-large.cnf
-  $key_buffer                      = '256M',
-  $max_allowed_packet              = '1M',
+  $key_buffer                      = '32M',
+  $max_allowed_packet              = '16M',            # http://www.webyog.com/blog/2009/08/10/mysql-server-has-gone-away-part-1-max_allowed_packet/
   $table_open_cache                = '256',
-  $sort_buffer_size                = '1M',
+  $sort_buffer_size                = '2M',
   $join_buffer_size                = '8M',
   $read_buffer_size                = '1M',
   $read_rnd_buffer_size            = '4M',
-  $myisam_sort_buffer_size         = '64M',
+  $myisam_sort_buffer_size         = '2M',
   $thread_cache_size               = 8,
   $thread_concurrency              = 8,
   $query_cache_size                = '16M',
