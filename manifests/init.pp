@@ -75,7 +75,7 @@ class mysql (
   $innodb_buffer_pool_size         = '256M',  # 256-512 MB for 1 GB node
   $innodb_additional_mem_pool_size = '20M',
   # to change log file size requires old logs to be deleted
-  $innodb_log_file_size            = undef,      # 25% of innodb_buffer_pool_size is recommended, but you have to delete old log files
+  $innodb_log_file_size            = '64M',      # 25% of innodb_buffer_pool_size is recommended, but you have to delete old log files
   $innodb_thread_concurrency       = 8,   # 2..4 x CPU. So for 4 cores = 8
   $innodb_log_buffer_size          = '4M',
   $innodb_flush_log_at_trx_commit  = 2,
